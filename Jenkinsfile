@@ -86,7 +86,7 @@ node {
             // -------------------------------------------------------------------------
 
             stage('Display Test Scratch Org') {
-                rc = bat returnStatus: true, script: ""\"${toolbelt}/sfdx\" force:org:display --targetusername ciorg"
+                rc = bat returnStatus: true, script: "\"${toolbelt}/sfdx\" force:org:display --targetusername ciorg"
                 if (rc != 0) {
                     error 'Salesforce test scratch org display failed.'
                 }
@@ -98,7 +98,7 @@ node {
             // -------------------------------------------------------------------------
 
             stage('Push To Test Scratch Org') {
-                 rc = bat returnStatus: true, script: ""\"${toolbelt}/sfdx\" force:source:push --targetusername ciorg"
+                 rc = bat returnStatus: true, script: "\"${toolbelt}/sfdx\" force:source:push --targetusername ciorg"
                 if (rc != 0) {
                     error 'Salesforce push to test scratch org failed.'
                 }
@@ -110,7 +110,7 @@ node {
             // -------------------------------------------------------------------------
 
             stage('Run Tests In Test Scratch Org') {
-                 rc = bat returnStatus: true, script: ""\"${toolbelt}/sfdx\" force:apex:test:run --targetusername ciorg --wait 10 --resultformat tap --codecoverage --testlevel ${TEST_LEVEL}"
+                 rc = bat returnStatus: true, script: "\"${toolbelt}/sfdx\" force:apex:test:run --targetusername ciorg --wait 10 --resultformat tap --codecoverage --testlevel ${TEST_LEVEL}"
                 if (rc != 0) {
                     error 'Salesforce unit test run in test scratch org failed.'
                 }
@@ -122,7 +122,7 @@ node {
             // -------------------------------------------------------------------------
 
             stage('Delete Test Scratch Org') {
-                  rc = bat returnStatus: true, script: ""\"${toolbelt}/sfdx\" force:org:delete --targetusername ciorg --noprompt"
+                  rc = bat returnStatus: true, script: "\"${toolbelt}/sfdx\" force:org:delete --targetusername ciorg --noprompt"
                 if (rc != 0) {
                     error 'Salesforce test scratch org deletion failed.'
                 }
@@ -137,7 +137,7 @@ node {
                 if (isUnix()) {
                     output = sh returnStdout: true, script: "${toolbelt}/sfdx force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --json --targetdevhubusername HubOrg"
                 } else {
-                    output = bat(returnStdout: true, script: ""\"${toolbelt}/sfdx\" force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --json --targetdevhubusername HubOrg").trim()
+                    output = bat(returnStdout: true, script: "\"${toolbelt}/sfdx\" force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --json --targetdevhubusername HubOrg").trim()
                     output = output.readLines().drop(1).join(" ")
                 }
 
@@ -160,7 +160,7 @@ node {
             // -------------------------------------------------------------------------
 
             stage('Create Package Install Scratch Org') {
-                rc = bat returnStatus: true, script: ""\"${toolbelt}/sfdx\" force:org:create --targetdevhubusername HubOrg --setdefaultusername --definitionfile config/project-scratch-def.json --setalias installorg --wait 10 --durationdays 1"
+                rc = bat returnStatus: true, script: "\"${toolbelt}/sfdx\" force:org:create --targetdevhubusername HubOrg --setdefaultusername --definitionfile config/project-scratch-def.json --setalias installorg --wait 10 --durationdays 1"
                 if (rc != 0) {
                     error 'Salesforce package install scratch org creation failed.'
                 }
@@ -172,7 +172,7 @@ node {
             // -------------------------------------------------------------------------
 
             stage('Display Install Scratch Org') {
-                rc = bat returnStatus: true, script: ""\"${toolbelt}/sfdx\" force:org:display --targetusername installorg"
+                rc = bat returnStatus: true, script: "\"${toolbelt}/sfdx\" force:org:display --targetusername installorg"
                 if (rc != 0) {
                     error 'Salesforce install scratch org display failed.'
                 }
@@ -184,7 +184,7 @@ node {
             // -------------------------------------------------------------------------
 
             stage('Install Package In Scratch Org') {
-                rc = bat returnStatus: true, script: ""\"${toolbelt}/sfdx\" force:package:install --package ${PACKAGE_VERSION} --targetusername installorg --wait 10"
+                rc = bat returnStatus: true, script: "\"${toolbelt}/sfdx\" force:package:install --package ${PACKAGE_VERSION} --targetusername installorg --wait 10"
                 if (rc != 0) {
                     error 'Salesforce package install failed.'
                 }
@@ -196,7 +196,7 @@ node {
             // -------------------------------------------------------------------------
 
             stage('Run Tests In Package Install Scratch Org') {
-                rc = bat returnStatus: true, script: ""\"${toolbelt}/sfdx\" force:apex:test:run --targetusername installorg --resultformat tap --codecoverage --testlevel ${TEST_LEVEL} --wait 10"
+                rc = bat returnStatus: true, script: "\"${toolbelt}/sfdx\" force:apex:test:run --targetusername installorg --resultformat tap --codecoverage --testlevel ${TEST_LEVEL} --wait 10"
                 if (rc != 0) {
                     error 'Salesforce unit test run in pacakge install scratch org failed.'
                 }
@@ -208,7 +208,7 @@ node {
             // -------------------------------------------------------------------------
 
             stage('Delete Package Install Scratch Org') {
-                 rc = bat returnStatus: true, script: ""\"${toolbelt}/sfdx\" force:org:delete --targetusername installorg --noprompt"
+                 rc = bat returnStatus: true, script: "\"${toolbelt}/sfdx\" force:org:delete --targetusername installorg --noprompt"
                 if (rc != 0) {
                     error 'Salesforce package install scratch org deletion failed.'
                 }
