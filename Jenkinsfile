@@ -48,20 +48,7 @@ node {
             }else{
                  rc = bat returnStatus: true, script: "\"${toolbelt}/sfdx\" force:auth:jwt:grant --clientid ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG} --jwtkeyfile \"${server_key_file}\" --setdefaultdevhubusername --setalias HubOrg"
             }
-            if (rc != 0) { error 'hub org authorization failed' }
-
-			println rc
-			
-			// need to pull out assigned username
-			if (isUnix()) {
-				rmsg = sh returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy -d manifest/. -u ${HUB_ORG}"
-			}else{
-			   rmsg = bat returnStdout: true, script: "\"${toolbelt}/sfdx\" force:mdapi:deploy -d manifest/. -u ${HUB_ORG}"
-			}
-			  
-            printf rmsg
-            println('Hello from a Job DSL script!')
-            println(rmsg)
+            
             }
 
 
