@@ -1,33 +1,33 @@
 #!groovy
 import groovy.json.JsonSlurperClassic
-node {
-
-    def BUILD_NUMBER=env.BUILD_NUMBER
-    def RUN_ARTIFACT_DIR="tests/${BUILD_NUMBER}"
-    def SFDC_USERNAME
-
-    def HUB_ORG="devopriyo.seal@wise-narwhal-q99ij0.com"
-    def SFDC_HOST = env.SFDC_HOST_DH
-    def JWT_KEY_CRED_ID = env.JWT_CRED_ID_DH
-    def CONNECTED_APP_CONSUMER_KEY="3MVG9QV5z8XnLDvw14MX3vRLCHO21RXvcIdHvaeHF4wfjyD2rxGNpa79ai_oWHg8DHbpMTZrBl8uFbKwKWWcL"
-    
+node {       
 	
-     def SF_CONSUMER_KEY="3MVG9QV5z8XnLDvw14MX3vRLCHO21RXvcIdHvaeHF4wfjyD2rxGNpa79ai_oWHg8DHbpMTZrBl8uFbKwKWWcL"
+    def SF_CONSUMER_KEY="3MVG9QV5z8XnLDvw14MX3vRLCHO21RXvcIdHvaeHF4wfjyD2rxGNpa79ai_oWHg8DHbpMTZrBl8uFbKwKWWcL"
     def SF_USERNAME=env."devopriyo.seal@wise-narwhal-q99ij0.com"
     def SERVER_KEY_CREDENTALS_ID= env.JWT_CRED_ID_DH
     def TEST_LEVEL='RunLocalTests'
     def PACKAGE_NAME='0Ho1U000000CaUzSAK'
     def PACKAGE_VERSION
     def SF_INSTANCE_URL = env.SF_INSTANCE_URL ?: "https://login.salesforce.com"	
-    println 'KEY IS' 
-    println JWT_KEY_CRED_ID
-    println HUB_ORG
-    println SFDC_HOST
-    println CONNECTED_APP_CONSUMER_KEY
+    
     def toolbelt = tool 'toolbelt'
-   stage('checkout source') {
+
+
+    // -------------------------------------------------------------------------
+    // Check out code from source control.
+    // -------------------------------------------------------------------------
+
+    stage('checkout source') {
         checkout scm
-    } withEnv(["HOME=${env.WORKSPACE}"]) {
+    }
+
+
+    // -------------------------------------------------------------------------
+    // Run all the enclosed stages with access to the Salesforce
+    // JWT key credentials.
+    // -------------------------------------------------------------------------
+    
+    withEnv(["HOME=${env.WORKSPACE}"]) {
         
         withCredentials([file(credentialsId: SERVER_KEY_CREDENTALS_ID, variable: 'server_key_file')]) {
 
