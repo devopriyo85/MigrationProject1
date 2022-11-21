@@ -3,7 +3,7 @@ import groovy.json.JsonSlurperClassic
 node {       
 	
     def SF_CONSUMER_KEY="3MVG9QV5z8XnLDvw14MX3vRLCHO21RXvcIdHvaeHF4wfjyD2rxGNpa79ai_oWHg8DHbpMTZrBl8uFbKwKWWcL"
-    def SF_USERNAME=env."devopriyo.seal@wise-narwhal-q99ij0.com"
+    def SF_USERNAME="devopriyo.seal@wise-narwhal-q99ij0.com"
     def SERVER_KEY_CREDENTALS_ID= env.JWT_CRED_ID_DH
     def TEST_LEVEL='RunLocalTests'
     def PACKAGE_NAME='0Ho1U000000CaUzSAK'
