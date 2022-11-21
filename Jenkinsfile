@@ -58,7 +58,7 @@ node {
 
             stage('Create Test Scratch Org') {
 		    
-                 rc = bat returnStatus: true, script: "\"${toolbelt}/sfdx\" force:org:create --targetdevhubusername HubOrg --setdefaultusername --definitionfile config/project-scratch-def.json --setalias ciorg --wait 10 --durationdays 1"
+                 rc = bat returnStatus: true, script: "\"${toolbelt}/sfdx\" force:org:create --targetdevhubusername  ${HUB_ORG} --setdefaultusername --definitionfile config/project-scratch-def.json --setalias ciorg --wait 10 --durationdays 1"
 
             
               
