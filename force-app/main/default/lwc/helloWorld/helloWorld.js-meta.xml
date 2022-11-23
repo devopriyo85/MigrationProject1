@@ -1,17 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata" fqn="contact_CRSProfileLayout">
-    <apiVersion>45.0</apiVersion>
-    <description>Use this component to display the fields from this person's related CRS Profile</description>
-    <masterLabel>CRS Profile</masterLabel>
-    <isExposed>true</isExposed>  
-    <targets>
-        <target>lightning__RecordPage</target>
-    </targets>
-    <targetConfigs>
-        <targetConfig targets="lightning__RecordPage">
-            <objects>
-                <object>Account</object>
-            </objects> 
-        </targetConfig>
-    </targetConfigs>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <isExposed>false</isExposed>
 </LightningComponentBundle>
