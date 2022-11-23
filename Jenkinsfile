@@ -36,9 +36,9 @@ node {
 			
 			// need to pull out assigned username
 			if (isUnix()) {
-				rmsg = sh returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:beta:deploy"
+				rmsg = sh returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:deploy"
 			}else{
-			   rmsg = bat returnStdout: true, script: "\"${toolbelt}/sfdx\"force:mdapi:beta:deploy"
+			   rmsg = bat returnStdout: true, script: "\"${toolbelt}/sfdx\" force:mdapi:deploy"
 			}
 			  
             printf rmsg
