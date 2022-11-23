@@ -36,9 +36,9 @@ node {
 			
 			// need to pull out assigned username
 			if (isUnix()) {
-				rmsg = sh returnStdout: true, script: "${toolbelt}/sfdx force:source:push -r  manifest/. -d manifest/."
+				rmsg = sh returnStdout: true, script: "${toolbelt}/sfdx force:mdapi:beta:deploy"
 			}else{
-			   rmsg = bat returnStdout: true, script: "\"${toolbelt}/sfdx\" force:source:push  -r  manifest/. -d manifest/."
+			   rmsg = bat returnStdout: true, script: "\"${toolbelt}/sfdx\"force:mdapi:beta:deploy"
 			}
 			  
             printf rmsg
